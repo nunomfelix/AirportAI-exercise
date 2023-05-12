@@ -1,13 +1,11 @@
 import { getValue, setValue } from 'express-ctx';
 
-import type { User } from '../../modules/user/entities/user.entity';
+import type { User } from '../../modules/user/schemas/user.schema';
 
 export class ContextProvider {
   private static readonly nameSpace = 'request';
 
   private static readonly authUserKey = 'user_key';
-
-  private static readonly languageKey = 'language_key';
 
   private static get<T>(key: string): T | undefined {
     return getValue<T>(ContextProvider.getKeyWithNamespace(key));

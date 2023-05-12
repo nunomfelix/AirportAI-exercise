@@ -48,7 +48,8 @@ async function bootstrap(): Promise<NestExpressApplication> {
 
   const configService = app.select(SharedModule).get(ApiConfigService);
 
-  await app.listen(3000);
+  const port = configService.appConfig.port;
+  await app.listen(port);
   console.info(`server running on ${await app.getUrl()}`);
 
   return app;
