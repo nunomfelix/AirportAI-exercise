@@ -15,14 +15,14 @@ import { PublicStrategy } from './public.strategy';
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       useFactory: (configService: ApiConfigService) => ({
-        privateKey: configService.authConfig.privateKey,
-        publicKey: configService.authConfig.publicKey,
+        secret: configService.authConfig.privateKey,
         signOptions: {
           algorithm: 'RS256',
           //expiresIn: configService.getNumber('JWT_EXPIRATION_TIME'),
         },
         verifyOptions: {
           algorithms: ['RS256'],
+          publicKey: configService.authConfig.publicKey,
         },
       }),
       inject: [ApiConfigService],

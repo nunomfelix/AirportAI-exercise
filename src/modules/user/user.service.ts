@@ -1,15 +1,26 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateUserDto } from './dto/create-user.dto';
 import { User, UserDocument } from './schemas/user.schema';
-
+import { UserRegisterDto } from '../auth/dto/user-register.dto';
+import { generateHash } from '../../core/common/utils';
 @Injectable()
 export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
-    const createdUser = new this.userModel(createUserDto);
+  async create(userRegisterDto: UserRegisterDto): Promise<User> {
+    const { username } = userRegisterDto;
+
+    const user = await this.findByUsername(username);
+    if (!!user) {
+      throw new BadRequestException('User exists already!');
+    }
+
+    const hashedPassword = await generateHash(userRegisterDto.password);
+    const createdUser = new this.userModel({
+      ...userRegisterDto,
+      password: hashedPassword,
+    });
     return createdUser.save();
   }
 
@@ -18,14 +29,14 @@ export class UserService {
   }
 
   async findOne(id: string): Promise<User> {
-    return this.userModel.findById(id);
+    return this.userModel.findById(id).exec();
   }
 
   async delete(id: string): Promise<User> {
-    return this.userModel.findByIdAndRemove(id);
+    return this.userModel.findByIdAndRemove(id).exec();
   }
 
-  async findByUsername(username: string): Promise<User> {
-    return this.userModel.findOne({ username: username });
+  async findByUsername(username: string): Promise<UserDocument> {
+    return this.userModel.findOne({ username: username }).exec();
   }
 }

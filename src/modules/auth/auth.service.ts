@@ -7,7 +7,7 @@ import type { RoleType } from '../../shared/constants';
 import { TokenType } from '../../shared/constants';
 
 import { ApiConfigService } from '../../shared/services/api-config.service';
-import type { User } from '../user/schemas/user.schema';
+import type { UserDocument } from '../user/schemas/user.schema';
 import { UserService } from '../user/user.service';
 
 import { TokenPayloadDto } from './dto/token-payload.dto';
@@ -40,7 +40,7 @@ export class AuthService {
     });
   }
 
-  async validateUser(userLoginDto: UserLoginDto): Promise<User> {
+  async validateUser(userLoginDto: UserLoginDto): Promise<UserDocument> {
     const user = await this.userService.findByUsername(userLoginDto.username);
 
     if (!user) {

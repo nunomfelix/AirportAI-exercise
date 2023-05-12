@@ -16,7 +16,7 @@ export class User {
   password: string;
 
   @Prop({ required: true, enum: RoleType, default: RoleType.AGENT })
-  role: string;
+  role: RoleType;
 
   @Prop({ default: Date.now })
   createdAt: Date;
