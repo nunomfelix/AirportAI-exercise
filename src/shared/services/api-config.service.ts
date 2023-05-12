@@ -89,7 +89,8 @@ export class ApiConfigService {
     const username = this.getString('DB_USERNAME');
     const password = this.getString('DB_PASSWORD');
 
-    return `mongodb://${username}:${password}@${host}:${port}/${database}`;
+    //return `mongodb://${username}:${password}@${host}:${port}/${database}`;
+    return `mongodb://${host}:${port}/${database}`;
   }
 
   get documentationEnabled(): boolean {

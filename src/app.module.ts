@@ -3,8 +3,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ApiConfigService } from './shared/services/api-config.service';
 import { UserModule } from './modules/user/user.module';
+import { ProductModule } from './modules/product/product.module';
 import { SharedModule } from './shared/shared.module';
-// import { AuthModule } from './modules/auth/auth.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
 
@@ -12,10 +12,11 @@ import { MongooseModule } from '@nestjs/mongoose';
   imports: [
     AuthModule,
     UserModule, 
+    ProductModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env'
-    }), 
+    }),
     MongooseModule.forRootAsync({
       imports: [SharedModule],
       useFactory: (configService: ApiConfigService) => 
