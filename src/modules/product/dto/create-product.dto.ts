@@ -3,7 +3,7 @@ import { IsNotEmpty, IsString, IsDate } from 'class-validator';
 export class CreateProductDto {
   @IsString()
   @IsNotEmpty()
-  readonly name: string;
+  readonly type: string;
 
   @IsString()
   @IsNotEmpty()

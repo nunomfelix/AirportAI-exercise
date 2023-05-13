@@ -21,7 +21,6 @@ export function Auth(
   options?: Partial<{ public: boolean }>,
 ): MethodDecorator {
   const isPublicRoute = options?.public;
-
   return applyDecorators(
     SetMetadata('roles', roles),
     UseGuards(AuthGuard({ public: isPublicRoute }), RolesGuard),

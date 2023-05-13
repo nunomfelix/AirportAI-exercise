@@ -5,6 +5,11 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product, ProductDocument } from './schemas/product.schema';
 
+interface Query {
+  $text?: { $search: string };
+  lostTime?: { $gte: Date };
+}
+
 @Injectable()
 export class ProductService {
   constructor(
@@ -21,7 +26,7 @@ export class ProductService {
     return this.productModel.find().exec();
   }
 
-  async findOne(id: number) {
+  async findById(id: string): Promise<Product> {
     return this.productModel.findById(id).exec();
   }
 
@@ -34,7 +39,21 @@ export class ProductService {
       .exec();
   }
 
-  async delete(id: string) {
+  async delete(id: string): Promise<Product> {
     return this.productModel.findByIdAndRemove(id).exec();
+  }
+
+  async searchByKeywords(
+    keywords: string,
+    lostTime: string,
+  ): Promise<Product[]> {
+    const query: Query = {};
+    if (keywords) {
+      query.$text = { $search: keywords };
+    }
+    if (lostTime) {
+      query.lostTime = { $gte: new Date(lostTime) };
+    }
+    return this.productModel.find(query);
   }
 }

@@ -34,10 +34,8 @@ export class AuthController {
   async userLogin(
     @Body() userLoginDto: UserLoginDto,
   ): Promise<LoginPayloadDto> {
-    console.log('entrei aqui \n\n\n\n');
     const user = await this.authService.validateUser(userLoginDto);
 
-    console.info('user', user);
     const token = await this.authService.createAccessToken({
       userId: user._id,
       role: user.role,

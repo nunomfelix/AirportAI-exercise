@@ -6,6 +6,7 @@ import {
   Put,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -13,8 +14,10 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './schemas/product.schema';
 import { RoleType } from '../../shared/constants';
 import { Auth, AuthUser, UUIDParam } from '../../core/decorators';
-import { User } from '../user/schemas/user.schema';
+import { User, UserDocument } from '../user/schemas/user.schema';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('products')
 @Controller('products')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
@@ -23,22 +26,21 @@ export class ProductController {
   @Auth([RoleType.AGENT])
   async create(
     @Body() createProductDto: CreateProductDto,
-    @AuthUser() user: User,
+    @AuthUser() user: UserDocument,
   ): Promise<Product> {
     return this.productService.create(createProductDto);
   }
 
   @Get()
   @Auth([RoleType.AGENT])
-  async list(): Promise<Product[]> {
-    console.log('entrei aqui');
+  async list(@AuthUser() user: UserDocument): Promise<Product[]> {
     return this.productService.findAll();
   }
 
   @Get(':id')
   @Auth([RoleType.AGENT])
-  async findOne(@UUIDParam('id') id: string): Promise<Product> {
-    return this.productService.findOne(+id);
+  async findById(id: string): Promise<Product> {
+    return this.productService.findById(id);
   }
 
   @Put(':id')
@@ -52,7 +54,25 @@ export class ProductController {
 
   @Delete(':id')
   @Auth([RoleType.AGENT])
-  async delete(@UUIDParam('id') id: string): Promise<Product> {
+  async delete(@Param('id') id: string): Promise<Product> {
     return this.productService.delete(id);
   }
+
+  @Get('searchKeywords')
+  @Auth([])
+  async searchByKeywords(
+    @Query('keywords') keywords: string,
+    @Query('lostTime') lostTime: string,
+  ): Promise<Product[]> {
+    return this.productService.searchByKeywords(keywords, lostTime);
+  }
+
+  // @Get('search')
+  // @Auth([])
+  // async searchByMessage(
+  //   @Body searchByMessageDto: SearchByMessageDto
+  // ): Promise<Product[]> {
+  //   return this.productService.searchByMessage(searchByMessageDto);
+  // }
+
 }
