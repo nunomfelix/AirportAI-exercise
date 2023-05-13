@@ -103,9 +103,6 @@ You can access the OpenAPI documentation by accessing https://localhost:3000/api
 ### Delete Product
 `DELETE /products/:id`
 
-### Search Product by Keywords
-`GET /products/searchByKeywords`
-
 ### Search Product by Message
 `GET /products/search`
 
