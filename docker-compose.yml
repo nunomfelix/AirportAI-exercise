@@ -3,32 +3,26 @@ services:
   app:
     env_file:
       - .env
-    container_name: airportai-exercise
-    restart: always
+    container_name: lostnfound-api
     build: .
     ports:
       - "$PORT:$PORT"
-    links:
+    depends_on:
       - database
+
   database:
-    image: postgres
-    container_name: database
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+    image: mongo:latest
+    container_name: lostnfound-database
     ports:
-      - "5432:5432"
+      - "27017:27017"
     volumes:
-      - database:/data/database
-      - ./init-data.sh:/docker-entrypoint-initdb.d/init-data.sh
+      - mongo-data:/data/db
     env_file:
       - .env
 
 networks:
   default:
-    name: airportai-network
+    name: lostnfound-network
 
 volumes:
-  database:
-    driver: local
+  mongo-data:
