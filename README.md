@@ -1,73 +1,113 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Lost and Found API - Airport AI Technical Exercise
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This repository is the implementation of the Airport AI Technical Exercise, contains a REST API developed using TypeScript and the Nest.js framework. It consists of a lost and found system for airports with several endpoints, described in the features section.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Features
+- Create/List/Update/Delete products
+- Search for a product by keywords
+- Search for a product by message
+- Airport role based authentication (Agent/Passenger)
+- Postman collection to interact with the API
 
 ## Installation
 
-```bash
-$ yarn install
-```
-
-## Running the app
+To install the dependencies, run:
 
 ```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+  yarn install
 ```
 
-## Test
+## Configuration
+
+Before start install PostgreSQL and fill correct configurations in .env file
+```bash
+#if you are using docker
+DB_HOST=database
+DB_PORT=27017
+DB_USERNAME=airportai
+DB_PASSWORD=airportai
+DB_DATABASE=airportai
+#else 
+DB_HOST=localhost
+DB_PORT=27017
+DB_USERNAME=airportai
+DB_PASSWORD=airportai
+DB_DATABASE=airportai
+```
+
+Some helper script to work with database
+```bash
+# To create new migration file
+yarn migration:create migration_name
+
+# Truncate full database (note: it isn't deleting the database)
+yarn schema:drop
+
+# Generate migration from update of entities
+yarn migration:generate 
+```
+
+## Docker
+if you are familiar with docker and docker-compose then you can run built in docker-compose file, which will install and configure application and database for you.
+
+### Docker installation
+Download docker from Official website
+
+- Mac https://docs.docker.com/docker-for-mac/install/
+- Windows https://docs.docker.com/docker-for-windows/install/
+- Ubuntu https://docs.docker.com/install/linux/docker-ce/ubuntu/
+
+### Docker-compose installation
+Download docker from Official website
+
+### Run
+Open terminal and navigate to project directory and run the following command.
 
 ```bash
-# unit tests
-$ yarn run test
+PORT=3000 docker-compose up --build
+```
+Note: application will run on port 3000 (http://localhost:3000)
 
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+## Tests
+To run the tests, run:
+```bash
+yarn run test
 ```
 
-## Support
+## Dev Server
+Launch the dev server
+```bash
+yarn start:dev
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## OpenAPI Documentation
+You can access the OpenAPI documentation by accessing https://localhost:3000/api
 
-## Stay in touch
+## API endpoints
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Register Agent
+`POST /auth/register`
 
-## License
+### Login Agent
+`POST /auth/login`
 
-Nest is [MIT licensed](LICENSE).
+### List Products
+`GET /products`
+
+### Create Product
+`POST /products`
+
+### Update Product
+`PUT /products/:id`
+
+### Delete Product
+`DELETE /products/:id`
+
+### Search Product by Keywords
+`GET /products/searchByKeywords`
+
+### Search Product by Message
+`GET /products/search`
+
+## Author
+- Author - [Nuno Félix](https://github.com/nunomfelix)

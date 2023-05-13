@@ -58,7 +58,7 @@ export class ProductController {
     return this.productService.delete(id);
   }
 
-  @Get('searchKeywords')
+  @Get('searchByKeywords')
   @Auth([])
   async searchByKeywords(
     @Query('keywords') keywords: string,
@@ -74,5 +74,4 @@ export class ProductController {
   // ): Promise<Product[]> {
   //   return this.productService.searchByMessage(searchByMessageDto);
   // }
-
 }
