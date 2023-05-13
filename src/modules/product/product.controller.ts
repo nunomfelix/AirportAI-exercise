@@ -11,14 +11,15 @@ import {
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { SearchProductDto } from './dto/search-product.dto';
 import { Product } from './schemas/product.schema';
 import { RoleType } from '../../shared/constants';
 import { Auth, AuthUser, UUIDParam } from '../../core/decorators';
 import { User, UserDocument } from '../user/schemas/user.schema';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('products')
 @Controller('products')
+@ApiTags('products')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
@@ -58,20 +59,8 @@ export class ProductController {
     return this.productService.delete(id);
   }
 
-  @Get('searchByKeywords')
-  @Auth([])
-  async searchByKeywords(
-    @Query('keywords') keywords: string,
-    @Query('lostTime') lostTime: string,
-  ): Promise<Product[]> {
-    return this.productService.searchByKeywords(keywords, lostTime);
+  @Post('search')
+  async search(@Body() searchProductDto: SearchProductDto): Promise<Product[]> {
+    return this.productService.search(searchProductDto);
   }
-
-  // @Get('search')
-  // @Auth([])
-  // async searchByMessage(
-  //   @Body searchByMessageDto: SearchByMessageDto
-  // ): Promise<Product[]> {
-  //   return this.productService.searchByMessage(searchByMessageDto);
-  // }
 }

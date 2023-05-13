@@ -93,6 +93,12 @@ export class ApiConfigService {
     return `mongodb://${host}:${port}/${database}`;
   }
 
+  get openAIConfig() {
+    return {
+      apiKey: this.getString('OPEN_AI_KEY'),
+    };
+  }
+
   get documentationEnabled(): boolean {
     return this.getBoolean('ENABLE_DOCUMENTATION');
   }

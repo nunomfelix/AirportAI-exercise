@@ -13,12 +13,12 @@ const ProductSchema = new mongoose.Schema({
 const Product = mongoose.model('Product', ProductSchema);
 
 async function seedProducts() {
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 250; i++) {
     const product = new Product({
-      type: faker.commerce.product(),
+      type: faker.commerce.product().toLowerCase(),
       description: faker.lorem.sentences(),
-      brand: faker.company.name(),
-      color: faker.color.human(),
+      brand: faker.company.name().toLowerCase(),
+      color: faker.color.human().toLowerCase(),
       lostTime: faker.date.past(),
     });
 
