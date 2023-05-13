@@ -19,7 +19,13 @@ To install the dependencies, run:
 
 ## Configuration
 
-Before start install PostgreSQL and fill correct configurations in .env file
+Create .env file for ENVIRONMENT variables
+
+```bash
+mv .env.example .env
+```
+Update .env file with config variables
+
 ```bash
 #if you are using docker
 DB_HOST=database
@@ -27,24 +33,14 @@ DB_PORT=27017
 DB_USERNAME=airportai
 DB_PASSWORD=airportai
 DB_DATABASE=airportai
+OPEN_AI_KEY=<YOUR_OPEN_AI_KEY>
 #else 
 DB_HOST=localhost
 DB_PORT=27017
 DB_USERNAME=airportai
 DB_PASSWORD=airportai
 DB_DATABASE=airportai
-```
-
-Some helper script to work with database
-```bash
-# To create new migration file
-yarn migration:create migration_name
-
-# Truncate full database (note: it isn't deleting the database)
-yarn schema:drop
-
-# Generate migration from update of entities
-yarn migration:generate 
+OPEN_AI_KEY=<YOUR_OPEN_AI_KEY>
 ```
 
 ## Docker
@@ -74,8 +70,8 @@ To run the tests, run:
 yarn run test
 ```
 
-## Dev Server
-Launch the dev server
+## Development Mode
+Launch the development mode:
 ```bash
 yarn start:dev
 ```

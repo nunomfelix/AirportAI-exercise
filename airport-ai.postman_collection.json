@@ -1,0 +1,196 @@
+{
+	"info": {
+		"_postman_id": "d92f7aae-6812-420e-abfe-f46b156e7ffb",
+		"name": "airport-ai",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10783300"
+	},
+	"item": [
+		{
+			"name": "Create Agent",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"user1\",\n    \"password\": \"password1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:3000/auth/register",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Agent",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"user1\",\n    \"password\": \"password1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Products",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDVlY2EyNjAxOGMxNjc0ODQ3ZDgzMzgiLCJ0eXBlIjoiQUNDRVNTX1RPS0VOIiwicm9sZSI6IkFHRU5UIiwiaWF0IjoxNjgzOTM2NDYyfQ.mbE8avkQXo3lwLQbXZlZjHIuPL2jHLO1wO6yPAyfx8YZhX_M5jhMzFEJYrnLR-SfefheYmJY20kVFmiRDMnuOTOyH1v8j_N6dUyAo3oWxscZ8uQNt6e8OcPWq4_jVBh1nUhQoHoE5Py_5CrbAwRlwyCP2NmmNzGjUBPhcbSOZxR0qtdXVYRz1pHxk0aT1D8pyqJ03cbwXBNeUsh0D_5FjNc0ZYGbLv6afhhKZ0dBkcTP3rxwlwHrKSeW6MqjfhqYAipkrUKMJfMbEyNPoDWuFQON2hu1ITsL5kc5w4z5EwUhEN2elncmUtjig3g9orEzy_2-iD_Ghut8AtYz54qj65-3iDGnLp3Og_CQ7946OfyduhOyHtnBGTOEACDsMaN90erPG06JBOAaZUND7CHV12NbHuH2NYH57WPzLYvjkGKMUhvMeagLhDyEb8OPlerT-9YKzal90pP1axpUfvjlhe6BHicL7KEKFxigbuTSwki9mI0G5W2b6P0JFYmPbhVxT8MsZWk01K60MkG3O5dFWeaMUj7V87FKBPGp8EcPS2JF7P-b-auZybuIcEkbiFIG-QxyEDJoemg5WcebIF4Ky3C57_v1cIDdfhEE8-v-_Iy478Gv1HB4jDmoFfNZ7UazD2uvjTQfEzVjKOXgwNDMRJrCMPektF4_tdLPq2jc42E",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDVlY2EyNjAxOGMxNjc0ODQ3ZDgzMzgiLCJ0eXBlIjoiQUNDRVNTX1RPS0VOIiwicm9sZSI6IkFHRU5UIiwiaWF0IjoxNjgzOTM2NDYyfQ.mbE8avkQXo3lwLQbXZlZjHIuPL2jHLO1wO6yPAyfx8YZhX_M5jhMzFEJYrnLR-SfefheYmJY20kVFmiRDMnuOTOyH1v8j_N6dUyAo3oWxscZ8uQNt6e8OcPWq4_jVBh1nUhQoHoE5Py_5CrbAwRlwyCP2NmmNzGjUBPhcbSOZxR0qtdXVYRz1pHxk0aT1D8pyqJ03cbwXBNeUsh0D_5FjNc0ZYGbLv6afhhKZ0dBkcTP3rxwlwHrKSeW6MqjfhqYAipkrUKMJfMbEyNPoDWuFQON2hu1ITsL5kc5w4z5EwUhEN2elncmUtjig3g9orEzy_2-iD_Ghut8AtYz54qj65-3iDGnLp3Og_CQ7946OfyduhOyHtnBGTOEACDsMaN90erPG06JBOAaZUND7CHV12NbHuH2NYH57WPzLYvjkGKMUhvMeagLhDyEb8OPlerT-9YKzal90pP1axpUfvjlhe6BHicL7KEKFxigbuTSwki9mI0G5W2b6P0JFYmPbhVxT8MsZWk01K60MkG3O5dFWeaMUj7V87FKBPGp8EcPS2JF7P-b-auZybuIcEkbiFIG-QxyEDJoemg5WcebIF4Ky3C57_v1cIDdfhEE8-v-_Iy478Gv1HB4jDmoFfNZ7UazD2uvjTQfEzVjKOXgwNDMRJrCMPektF4_tdLPq2jc42E",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"Jacket\",\n    \"description\": \"Loreum Ipsum\",\n    \"brand\": \"Ralph Lauren\",\n    \"color\": \"Blue\",\n    \"lostTime\": \"2023-05-12T23:22:14.775+00:00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDVlY2EyNjAxOGMxNjc0ODQ3ZDgzMzgiLCJ0eXBlIjoiQUNDRVNTX1RPS0VOIiwicm9sZSI6IkFHRU5UIiwiaWF0IjoxNjgzOTM2NDYyfQ.mbE8avkQXo3lwLQbXZlZjHIuPL2jHLO1wO6yPAyfx8YZhX_M5jhMzFEJYrnLR-SfefheYmJY20kVFmiRDMnuOTOyH1v8j_N6dUyAo3oWxscZ8uQNt6e8OcPWq4_jVBh1nUhQoHoE5Py_5CrbAwRlwyCP2NmmNzGjUBPhcbSOZxR0qtdXVYRz1pHxk0aT1D8pyqJ03cbwXBNeUsh0D_5FjNc0ZYGbLv6afhhKZ0dBkcTP3rxwlwHrKSeW6MqjfhqYAipkrUKMJfMbEyNPoDWuFQON2hu1ITsL5kc5w4z5EwUhEN2elncmUtjig3g9orEzy_2-iD_Ghut8AtYz54qj65-3iDGnLp3Og_CQ7946OfyduhOyHtnBGTOEACDsMaN90erPG06JBOAaZUND7CHV12NbHuH2NYH57WPzLYvjkGKMUhvMeagLhDyEb8OPlerT-9YKzal90pP1axpUfvjlhe6BHicL7KEKFxigbuTSwki9mI0G5W2b6P0JFYmPbhVxT8MsZWk01K60MkG3O5dFWeaMUj7V87FKBPGp8EcPS2JF7P-b-auZybuIcEkbiFIG-QxyEDJoemg5WcebIF4Ky3C57_v1cIDdfhEE8-v-_Iy478Gv1HB4jDmoFfNZ7UazD2uvjTQfEzVjKOXgwNDMRJrCMPektF4_tdLPq2jc42E",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/products?id=645ed845b11361923fad8782",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "645ed845b11361923fad8782"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDVlY2EyNjAxOGMxNjc0ODQ3ZDgzMzgiLCJ0eXBlIjoiQUNDRVNTX1RPS0VOIiwicm9sZSI6IkFHRU5UIiwiaWF0IjoxNjg0MDA3MjA0fQ.pHrwv7vxBAXBRS4YkHMQCWSJ9jFVvLoxYEKnQNqkdJbmmxqFqX-FrYAZbHBTHSY9lLrJ0Cuc8aQWbyE9fyDWWCr2T0D2JbKMe2zAfWhUNWOFIIm478xC5gGpgpGBuSFPlffRjIY-iIv7t_ADOOJFQraL4cqNV3uTTDt9VZ3Rz27tgGbP8eN61WOv0pY34zQlLrT0eIp7i_XrBYKrF2e7sEbZ1SMYreO0ka5aegCFdDhpuhFT4cmPmgSaUJJeJXTZcIIEmWpOsnl-Ser6g4Sjf8VbthU_bZsTbeDaSiUQWjjYP8MzQ4eyGyLSn0o2KhGqxrFCVRbHfsComgVfmJflG0JOGZVlpinK7009Vwcvd7iA7muVUX7PVcveVL_yx3ToYUJ3alMIOw-ZyzZUBTaw3Xu35iZc65tWLBD5q6GhqbzLN1kRdIwMXK7cHrtmMSl_bXkQshXpVe7lh4t2-pSlK87PRqJodw6U8Vn-ZwHf-Re9Nl0ch5Sr9G_IsDM74133VymVb19ttqPM3g5K6dii5K7PguEWjOq-A33APO7auM1pIgHjfcDoaw5-QpJa9sLw3F1DlHCU8M8BCzMIK3h-aSWaDJE4C2ZaPSqvlej3SgFvtyQH3Ghnxo-xm16ucs1IsxQxPQg-LKALgB80_g8cq8op0ezgq89mjlaPiAAJDpM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"message\": \"I lost my Ralph Lauren Jacket\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/products/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
