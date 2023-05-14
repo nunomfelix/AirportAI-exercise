@@ -191,6 +191,35 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Search (Message & Lost Time)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"message\": \"I lost my ralph lauren jacket\",\n    \"lostTime\": \"2023-05-12T23:22:14.775Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/products/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"search"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
