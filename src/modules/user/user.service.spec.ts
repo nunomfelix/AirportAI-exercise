@@ -9,15 +9,23 @@ describe('UserService', () => {
   let userService: UserService;
   let userModel: any;
 
-  beforeEach(async () => {
-    userModel = {
-      find: jest.fn().mockReturnThis(),
-      findById: jest.fn().mockReturnThis(),
-      findByIdAndRemove: jest.fn().mockReturnThis(),
-      findOne: jest.fn().mockReturnThis(),
-      create: jest.fn(),
-      exec: jest.fn(),
+  const mockUserModel = () => {
+    const mockedUserModel = function(data) {
+      this.data = data;
+      this.save = jest.fn().mockResolvedValue(this);
     };
+
+    mockedUserModel.find = jest.fn().mockReturnThis();
+    mockedUserModel.findById = jest.fn().mockReturnThis();
+    mockedUserModel.findByIdAndRemove = jest.fn().mockReturnThis();
+    mockedUserModel.findOne = jest.fn().mockReturnThis();
+    mockedUserModel.exec = jest.fn();
+
+    return mockedUserModel;
+  };
+
+  beforeEach(async () => {
+    userModel = mockUserModel();
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -81,16 +89,15 @@ describe('UserService', () => {
     await expect(userService.create(userRegisterDto)).rejects.toThrow(BadRequestException);
   });
 
-  // it('should create a new user', async () => {
-  //   userModel.findOne().exec.mockResolvedValue(null);
-  //   const userRegisterDto: UserRegisterDto = {
-  //     username: 'testUsername',
-  //     password: 'testPassword',
-  //   };
-  //   const user = new User();
-  //   userModel.create.mockResolvedValue(user);
-  //   const result = await userService.create(userRegisterDto);
-  //   expect(result).toEqual(user);
-  //   expect(userModel.create).toHaveBeenCalled();
-  // });
+  it('should create a new user', async () => {
+    userModel.findOne().exec.mockResolvedValue(null);
+    const userRegisterDto: UserRegisterDto = {
+      username: 'testUsername',
+      password: 'testPassword',
+    };
+    const user = new userModel(userRegisterDto);
+    user.save.mockResolvedValue(user);
+    const result = await userService.create(userRegisterDto);
+    expect(result.username).toEqual(user.username);
+});
 });

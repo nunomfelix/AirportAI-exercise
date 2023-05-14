@@ -19,11 +19,6 @@ export class OpenAiService {
       max_tokens: 60,
     });
 
-    console.info('gptResponse', gptResponse);
-    console.info(
-      'gptResponse.data.choices[0].text.trim()',
-      gptResponse.data.choices[0].text.trim(),
-    );
     return JSON.parse(gptResponse.data.choices[0].text.trim());
   }
 }

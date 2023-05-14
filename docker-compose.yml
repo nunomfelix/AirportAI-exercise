@@ -19,6 +19,13 @@ services:
       - mongo-data:/data/db
     env_file:
       - .env
+    
+  seeder:
+    build:
+      context: .
+      dockerfile: Dockerfile.seed
+    depends_on:
+      - database
 
 networks:
   default:

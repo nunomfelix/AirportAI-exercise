@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   Query,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -16,7 +18,7 @@ import { Product } from './schemas/product.schema';
 import { RoleType } from '../../shared/constants';
 import { Auth, AuthUser, UUIDParam } from '../../core/decorators';
 import { User, UserDocument } from '../user/schemas/user.schema';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('products')
 @ApiTags('products')
@@ -59,6 +61,8 @@ export class ProductController {
     return this.productService.delete(id);
   }
 
+  @HttpCode(HttpStatus.OK)
+  @ApiOkResponse({ type: Product })
   @Post('search')
   async search(@Body() searchProductDto: SearchProductDto): Promise<Product[]> {
     return this.productService.search(searchProductDto);

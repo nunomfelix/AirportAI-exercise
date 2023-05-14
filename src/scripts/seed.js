@@ -30,7 +30,7 @@ async function seedProducts() {
 }
 
 mongoose
-  .connect('mongodb://localhost:27017/airportai', {
+  .connect('mongodb://database:27017/airportai', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

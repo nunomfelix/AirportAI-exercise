@@ -40,9 +40,6 @@ export class AuthController {
       userId: user._id,
       role: user.role,
     });
-
-    console.info('token', token);
-
     return new LoginPayloadDto(user, token);
   }
 
